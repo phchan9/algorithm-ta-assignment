@@ -19,7 +19,8 @@ if __name__ == "__main__":
     with open("input.bin","r") as infile, open("output.txt","w") as outfile:
         packer = msgpack.Packer()
         unpacker = msgpack.Unpacker(infile)
-
+        # TODO: Get the line from unpacker
+        # TODO: Write result to packer
         # cnt_test = unpacker.readline()
         print unpacker, type(unpacker)
         # outfile.write(packer.pack(result))
