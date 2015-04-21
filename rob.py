@@ -1,5 +1,5 @@
 __author__ = 'phchang'
-import msgpack
+import msgpack,sys
 
 class Code:
     # @param num, a list of integer
@@ -16,12 +16,18 @@ class Code:
 if __name__ == "__main__":
 
     #with open("input.txt","r") as infile, open("output.txt","w") as outfile:
-    with open("input.bin","r") as infile, open("output.txt","w") as outfile:
+    with open("input.bin","r") as infile, open("output.bin","w") as outfile:
         packer = msgpack.Packer()
         unpacker = msgpack.Unpacker(infile)
         # TODO: Get the line from unpacker
-        # TODO: Write result to packer
-        # cnt_test = unpacker.readline()
-        print unpacker, type(unpacker)
-        # outfile.write(packer.pack(result))
+        cnt_test =  unpacker.next()
+        solver = Code()
+        for val in unpacker:  # val is type of str
+            print "input:", val.strip()
+            ans = '%d\n' % (solver.rob(map(lambda x:int(x),val.strip().split())))
+            print "output:", ans ,
+            # TODO: Write result to packer
+            outfile.write(packer.pack(ans))
+
+    # TODO: Add Unit Test
 

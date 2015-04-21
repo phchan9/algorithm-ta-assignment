@@ -22,6 +22,7 @@ def extract(filename):
 
 
 if __name__ == "__main__":
+    # TODO: Add python argparse use, -pack -unpack -verbose(-v, which print in stdin)
     usage = "Usage: python gen_binary.py <pack/unpack> <filename>"
     if len(sys.argv) != 3:
         print usage
