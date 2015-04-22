@@ -8,3 +8,7 @@
 
 ### Python module argopt
 * official doc, https://docs.python.org/2/library/argparse.html
+* offical tutorial, https://docs.python.org/2/howto/argparse.html#id1
+
+### Python Unittest
+* offical doc, https://docs.python.org/2/library/unittest.html

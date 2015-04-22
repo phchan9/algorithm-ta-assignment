@@ -24,10 +24,9 @@ if __name__ == "__main__":
         solver = Code()
         for val in unpacker:  # val is type of str
             print "input:", val.strip()
-            ans = '%d\n' % (solver.rob(map(lambda x:int(x),val.strip().split())))
+            ans = '%d\n' % (Code().rob(map(lambda x:int(x),val.strip().split())))
             print "output:", ans ,
             # TODO: Write result to packer
             outfile.write(packer.pack(ans))
 
-    # TODO: Add Unit Test
 
