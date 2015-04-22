@@ -12,6 +12,12 @@ class TestCode(unittest.TestCase):
         self.test_sum = 0
 
     def recursive(self, nums , idx):
+        """
+        Recursive Version for this Rob problem
+        :param nums:
+        :param idx:
+        :return:
+        """
         if idx < 0:
             return 0
         else:
@@ -22,6 +28,40 @@ class TestCode(unittest.TestCase):
             else:
                 return pre2 + nums[idx]
 
+    def check_list(self,list_num ,ans ,list_house):
+        """
+        Validates houses if they statisfy the following conditions:
+            1. index range
+            2. adjacency relation
+            4. difference between return value and sum of list
+            3. empty case
+        :param list_num:
+        :param ans:
+        :param list_house:
+        :return:
+        """
+        sum = 0
+        print list_house
+
+        # Check sum
+        for val in list_house:
+            sum += list_num[val]
+
+        print "Check?", ans, sum
+
+        self.assertEqual(ans,sum,"Sum of the return list isn't equal to return sum, %d vs %d" % (ans,sum))
+
+        # Check adjacency
+        pre = -2
+        for val in list_house:
+            self.assertNotEqual(pre, val-1, "Adjaceny rule violated, (%d,%d)" %(pre, val-1))
+            pre = val
+
+        print "Pass check_list!"
+
+
+
+    ### Version 1 ###################################
     def test_empty(self):
         self.assertEqual(0,self.code.rob([]))
 
@@ -30,6 +70,10 @@ class TestCode(unittest.TestCase):
 
     def test_two(self):
         self.assertEqual(3, self.code.rob([3,1]))
+
+    def test_four(self):
+        l = [25,0,12,83]
+        self.assertEqual(108, self.code.rob(l))
 
     def test_sequential(self):
         """
@@ -67,7 +111,7 @@ class TestCode(unittest.TestCase):
         """
         test case: randint 0 randint 0 randint 0 .....
         list size: 100
-        range of randint : < 20
+        range of randint : < 100
         """
         l = [ random.randint(1,100) if i % 2 else 0 for i in range(1,100)]
         ans = sum(l)
@@ -83,6 +127,49 @@ class TestCode(unittest.TestCase):
         # print l
         ans = sum(l)
         self.assertEqual(ans, self.code.rob(l))
+
+    ### Version 2 ###################################
+    def test_empty_checklist(self):
+        l = []
+        ans, ret_list = self.code.rob_list(l)
+        self.assertEqual(sum(l), ans)
+        self.check_list(l, ans, ret_list)
+
+    def test_one_checklist(self):
+        l = [100]
+        ans, ret_list = self.code.rob_list(l)
+        self.assertEqual(sum(l), ans)
+        self.check_list(l, ans, ret_list)
+
+    def test_seq100_checklist(self):
+        l = range(1, 100)
+        ans, ret_list = self.code.rob_list(l)
+        self.assertEqual(2500, ans)
+        self.check_list(l, ans, ret_list)
+
+    def test_zeropad100_checklist(self):
+        """
+        test case: randint 0 randint 0 randint 0 .....
+        list size: 100
+        range of randint : < 100
+        """
+        l = [ random.randint(1,100) if i % 2 else 0 for i in range(1,100)]
+        ans, ret_list = self.code.rob_list(l)
+        self.assertEqual(sum(l), ans)
+        self.check_list(l, ans, ret_list)
+
+    def test_zeropadd100_checklist(self):
+        """
+        test case: randint 0 0 randint 0 0 randint 0 0.....
+        list size: 100
+        range of randint : < 100
+        """
+        l = [ random.randint(1,100) if i % 3 == 1 else 0 for i in range(1,5)]
+        print l
+        ans, ret_list = self.code.rob_list(l)
+        self.assertEqual(sum(l), ans)
+        self.check_list(l, ans, ret_list)
+        # TODO: Debug this case, return precedence list Error!
 
 
 if __name__ == "__main__":

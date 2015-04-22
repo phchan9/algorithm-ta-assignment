@@ -2,6 +2,8 @@ __author__ = 'phchang'
 import msgpack,sys
 
 class Code:
+
+    # Version 1
     # @param num, a list of integer
     # @return an integer
     def rob(self, num):
@@ -12,6 +14,29 @@ class Code:
             pre2, pre = pre, max(pre2+i,pre)
         return pre
 
+    # Version 2
+    # @param num, a list of integer
+    # @return an integer, an list of precedence
+    def rob_list(self,num):
+        record = [0] * len(num)
+        if len(num) == 0:
+            return 0, []
+        pre2,pre = 0, 0
+        for idx,val in enumerate(num):
+            pre2, pre = pre, max(pre2+val,pre)
+            # TODO: Some problem occur in store path
+            if idx >=2 :
+                record[idx] = idx-1 if pre2+val < pre else idx-2
+        ans = pre
+        p = []
+        print record
+        idx_pre,cur_idx = record[-1], len(num)-1
+        while idx_pre != -1 :
+            p.append(cur_idx)
+            idx_pre, cur_idx = record[idx_pre], idx_pre
+        p.append(cur_idx)
+
+        return ans, p[::-1]
 
 if __name__ == "__main__":
 
