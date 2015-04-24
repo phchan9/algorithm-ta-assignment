@@ -164,12 +164,66 @@ class TestCode(unittest.TestCase):
         list size: 100
         range of randint : < 100
         """
-        l = [ random.randint(1,100) if i % 3 == 1 else 0 for i in range(1,5)]
+        l = [ random.randint(1,100) if i % 3 == 1 else 0 for i in range(1,100)]
         print l
         ans, ret_list = self.code.rob_list(l)
         self.assertEqual(sum(l), ans)
         self.check_list(l, ans, ret_list)
         # TODO: Debug this case, return precedence list Error!
+
+    def test_zerofilled_checklist(self):
+        """
+        test case:  0 0 0 0.... 1 0 0 0....
+        :return:
+        """
+        l = [0]*20
+        l.insert(9,123)
+        print l
+        ans, ret_list = self.code.rob_list(l)
+        self.assertEqual(sum(l), ans)
+        self.check_list(l, ans, ret_list)
+
+    def test_zerofilledmiddle_checklist(self):
+        """
+        test case:  1 0 0 0.... 0 0 0 0.... 1
+        :return:
+        """
+        l = [0]*20
+        l.insert(0,123)
+        l.append(321)
+        print l
+        ans, ret_list = self.code.rob_list(l)
+        self.assertEqual(sum(l), ans)
+        self.check_list(l, ans, ret_list)
+
+    def test_zerorandomfilled_checklist(self):
+        """
+        random zero padded interval
+        test case:  1 0 1 0 0 123 0 .... 1 0 0 0....
+        :return:
+        """
+        l = []
+        for i in range(40):
+            l.append(random.randint(1,100))
+            l.extend([0] * random.randint(1,10))
+        print l
+        ans, ret_list = self.code.rob_list(l)
+        self.check_list(l, ans, ret_list)
+
+    def test_random10_checklist(self):
+        l = [ random.randint(1,100) for i in range(1,10)]
+        print l
+        ans, ret_list = self.code.rob_list(l)
+        # self.assertEqual(sum(l), ans)
+        self.check_list(l, ans, ret_list)
+
+    def test_random100_checklist(self):
+        l = [ random.randint(1,100) for i in range(1,100)]
+        print l
+        ans, ret_list = self.code.rob_list(l)
+        # self.assertEqual(sum(l), ans)
+        self.check_list(l, ans, ret_list)
+
 
 
 if __name__ == "__main__":

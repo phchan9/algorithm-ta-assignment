@@ -18,25 +18,26 @@ class Code:
     # @param num, a list of integer
     # @return an integer, an list of precedence
     def rob_list(self,num):
-        record = [0] * len(num)
+        dp = [0] * (len(num)+1)
+        pre = [0] * (len(num)+1)
         if len(num) == 0:
             return 0, []
-        pre2,pre = 0, 0
-        for idx,val in enumerate(num):
-            pre2, pre = pre, max(pre2+val,pre)
-            # TODO: Some problem occur in store path
-            if idx >=2 :
-                record[idx] = idx-1 if pre2+val < pre else idx-2
-        ans = pre
-        p = []
-        print record
-        idx_pre,cur_idx = record[-1], len(num)-1
-        while idx_pre != -1 :
-            p.append(cur_idx)
-            idx_pre, cur_idx = record[idx_pre], idx_pre
-        p.append(cur_idx)
+        num.insert(0, 0)
+        dp[1] = num[1]
+        pre[1] = 1
+        for i in range(2,len(num)):
+            dp[i] = max(dp[i-2] + num[i], dp[i-1])
+            pre[i] = i-2 if dp[i-2] + num[i] > dp[i-1] else i-1
 
-        return ans, p[::-1]
+        sum = dp[-1]
+        path = []
+        while sum != 0:
+            idx = dp.index(sum) # find first index of value
+            sum -= num[idx]
+            path.append(idx)
+
+        return dp[-1], path[::-1]
+
 
 if __name__ == "__main__":
 
