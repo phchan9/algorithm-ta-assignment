@@ -28,6 +28,21 @@ class TestCode(unittest.TestCase):
             else:
                 return pre2 + nums[idx]
 
+    def memoziation(self, nums):
+        mm = [-1] * len(nums)
+        mm[0] = nums[0]
+        mm[1] = nums[1]
+        def mem_recursive(nums, idx):
+
+            if mm[idx] != -1:
+                return mm[idx]
+
+            mm[idx] = max( mem_recursive(nums,idx-2) + nums[idx], mem_recursive(nums, idx-1))
+            return mm[idx]
+
+        return mem_recursive(nums, len(nums)-1)
+
+
     def check_list(self,list_num ,ans ,list_house):
         """
         Validates houses if they statisfy the following conditions:
@@ -208,6 +223,8 @@ class TestCode(unittest.TestCase):
             l.extend([0] * random.randint(1,10))
         print l
         ans, ret_list = self.code.rob_list(l)
+        # self.assertEqual(sum(l), ans)
+        self.assertEqual( self.memoziation(l), ans)
         self.check_list(l, ans, ret_list)
 
     def test_random10_checklist(self):
