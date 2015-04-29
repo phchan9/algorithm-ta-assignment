@@ -31,7 +31,7 @@ class TestCode(unittest.TestCase):
     def memoziation(self, nums):
         mm = [-1] * len(nums)
         mm[0] = nums[0]
-        mm[1] = nums[1]
+        mm[1] = nums[1] if nums[1] > nums[0] else nums[0] # NOTICE this keypoint
         def mem_recursive(nums, idx):
 
             if mm[idx] != -1:
@@ -41,6 +41,10 @@ class TestCode(unittest.TestCase):
             return mm[idx]
 
         return mem_recursive(nums, len(nums)-1)
+        # Debug use
+        # ans = mem_recursive(nums, len(nums)-1)
+        #print mm
+        #return ans
 
 
     def check_list(self,list_num ,ans ,list_house):
@@ -97,6 +101,7 @@ class TestCode(unittest.TestCase):
         """
         l = [1,3,4,5,6]
         self.assertEqual(self.recursive(l, len(l) - 1), self.code.rob(l))
+        self.assertEqual(self.memoziation(l), self.code.rob(l))
 
     def test_10_40(self):
         """
@@ -106,7 +111,8 @@ class TestCode(unittest.TestCase):
         for i in range(10,40):
             l = [random.randint(1,100) for j in range(i)]
             print "random input list(len:{})".format(len(l)), l
-            self.assertEqual(self.recursive(l, len(l) - 1), self.code.rob(l))
+            #self.assertEqual(self.recursive(l, len(l) - 1), self.code.rob(l))
+            self.assertEqual(self.memoziation(l), self.code.rob(l))
             print "ans",self.code.rob(l)
 
     # @unittest.skip("Too big")

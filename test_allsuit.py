@@ -101,13 +101,26 @@ class TestCode(unittest.TestCase):
         l = []
         for i in range(40):
             l.append(random.randint(1,10000))
-            l.extend([0]*random.randint(1,100))
+            l.extend([0]*random.randint(1,50))
         ans, ret_list = self.runner(l)
         print l
         self.verifier(l, ans, ret_list)
 
+    def test_middle_zero(self):
+        l = [ 0 if i != 51 else 1 for i in range(100)]
+        ans, ret_list = self.runner(l)
+        print l
+        self.verifier(l, ans, ret_list)
+
+    def test_first_tail_zero(self):
+        l = [ 0 if i != 1 and i != 89 else 1 for i in range(100)]
+        ans, ret_list = self.runner(l)
+        print l
+        self.verifier(l, ans, ret_list)
+
+    @unittest.skip("Just for test of recursion depth")
     def test_limit_memo(self):
-        for i in range(1200,1500):  # upper 1500 , get limit
+        for i in range(1200,1400):  # upper 1400 , get limit
             l = [ random.randint(1,10000) for j in range(i)]
             ans, ret_list = self.runner(l)
             print l
