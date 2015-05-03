@@ -1,5 +1,6 @@
 import unittest
 from rob import Code
+from checker import Checker
 import random
 
 __author__ = 'phchang'
@@ -64,7 +65,7 @@ class TestCode(unittest.TestCase):
 
         # Check sum
         for val in list_house:
-            sum += list_num[val]
+            sum += list_num[val-1]  #off by one
 
         print "Check?", ans, sum
 
@@ -247,7 +248,25 @@ class TestCode(unittest.TestCase):
         # self.assertEqual(sum(l), ans)
         self.check_list(l, ans, ret_list)
 
+    def test_checker(self):
 
+        teacher = Checker()
+        l = [ random.randint(1,100) for i in range(1,55000)]
+        # print l
+        ans, ret_list = self.code.rob_list(l)
+        # ret_list = ret_list[::-1]
+        gold_ans = self.code.rob(l)
+        self.assertTrue(teacher.check_all(l, gold_ans, ans, ret_list),"Checker Fail!")
+        l = []
+        print l
+        ans, ret_list = self.code.rob_list(l)
+        gold_ans = self.code.rob(l)
+        self.assertTrue(teacher.check_all(l, gold_ans, ans, ret_list),"Checker Fail!")
+        l = [100]
+        print l
+        ans, ret_list = self.code.rob_list(l)
+        gold_ans = self.code.rob(l)
+        self.assertTrue(teacher.check_all(l, gold_ans, ans, ret_list),"Checker Fail!")
 
 if __name__ == "__main__":
     unittest.main()

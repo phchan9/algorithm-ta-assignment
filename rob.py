@@ -51,9 +51,11 @@ if __name__ == "__main__":
         solver = Code()
         for val in unpacker:  # val is type of str
             print "input:", val.strip()
-            ans = '%d\n' % (Code().rob(map(lambda x:int(x),val.strip().split())))
-            print "output:", ans ,
+            #ans = '%d\n' % (Code().rob(map(lambda x:int(x),val.strip().split())))
+            ans, ret_list = Code().rob_list(map(lambda x:int(x),val.strip().split()))
+            #print ans, ret_list
+            output = "%d\n%s\n" % ( ans, " ".join(map(str,ret_list)))
             # TODO: Write result to packer
-            outfile.write(packer.pack(ans))
+            outfile.write(packer.pack(output))
 
 
