@@ -1,4 +1,4 @@
 all:
 
 clean:
-	rm *.pyc *.report
+	rm *.pyc *.report *.final

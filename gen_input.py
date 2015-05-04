@@ -9,16 +9,16 @@ if __name__ == '__main__':
         tests = []
         # tests.append([])
         tests.append([100])
-        tests.append([ random.randint(1,10000) for i in range(100)])
-        tests.append([ random.randint(1,10000) for i in range(500)])
-        tests.append([ random.randint(1,10000) for i in range(1500)])
-        tests.append([ random.randint(1,10000) for i in range(2500)])
-        tests.append([ random.randint(1,10000) for i in range(5500)])
-        tests.append([ random.randint(1,10000) for i in range(9500)])
+        tests.append([ random.randint(1,1000000) for i in range(100)])
+        tests.append([ random.randint(1,1000000) for i in range(500)])
+        tests.append([ random.randint(1,1000000) for i in range(1500)])
+        tests.append([ random.randint(1,1000000) for i in range(2500)])
+        tests.append([ random.randint(1,1000000) for i in range(5500)])
+        tests.append([ random.randint(1,1000000) for i in range(9500)])
 
         zerofilled_test1 = []
         for i in range(40):
-            zerofilled_test1.append(random.randint(1,1000))
+            zerofilled_test1.append(random.randint(1,100000))
             zerofilled_test1.extend([0] * random.randint(1,100))
         zerofilled_test2 = [0]*10000
         zerofilled_test2[3333] = 1234

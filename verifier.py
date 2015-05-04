@@ -5,6 +5,7 @@ import sys
 import os
 import datetime
 from checker import Checker
+import msgpack
 
 
 def DetectRuntimeError(filename):
@@ -41,10 +42,13 @@ if __name__ == "__main__":
 
 
 	with open('output.txt.{0}'.format(sys.argv[1]), 'r') as f:
-		outputs = [line.strip() for line in f if line.strip()]
+		unpacker = msgpack.Unpacker(f)
+		outputs = [line.strip() for line in unpacker if line.strip()]
 
 	with open('output.txt.gold', 'r') as f:
-		outputs_gold = [line.strip() for line in f if line.strip()]
+		unpacker = msgpack.Unpacker(f)
+		outputs_gold = [line.strip() for line in unpacker if line.strip()]
+
 
 	fCP = open('check_pattern_concise_{0}.report.final'.format(sys.argv[1]),'w')
 	nTest = len(outputs_gold)/2

@@ -42,20 +42,18 @@ class Code:
 
 if __name__ == "__main__":
 
-    #with open("input.txt","r") as infile, open("output.txt","w") as outfile:
-    with open("input.bin","r") as infile, open("output.bin","w") as outfile:
+    with open("input.txt","r") as infile, open("output.txt","w") as outfile:
         packer = msgpack.Packer()
         unpacker = msgpack.Unpacker(infile)
-        # TODO: Get the line from unpacker
+        # Get the line from unpacker
         cnt_test =  unpacker.next()
         solver = Code()
         for val in unpacker:  # val is type of str
-            print "input:", val.strip()
+            #print "input:", val.strip()
+            # Version1
             #ans = '%d\n' % (Code().rob(map(lambda x:int(x),val.strip().split())))
+            # Version2
             ans, ret_list = Code().rob_list(map(lambda x:int(x),val.strip().split()))
-            #print ans, ret_list
-            output = "%d\n%s\n" % ( ans, " ".join(map(str,ret_list)))
-            # TODO: Write result to packer
+            outfile.write(packer.pack(str(ans)))
+            output = "%s\n" % (" ".join(map(str,ret_list)))
             outfile.write(packer.pack(output))
-
-
