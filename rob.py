@@ -53,7 +53,10 @@ if __name__ == "__main__":
             # Version1
             #ans = '%d\n' % (Code().rob(map(lambda x:int(x),val.strip().split())))
             # Version2
-            ans, ret_list = Code().rob_list(map(lambda x:int(x),val.strip().split()))
-            outfile.write(packer.pack(str(ans)))
-            output = "%s\n" % (" ".join(map(str,ret_list)))
-            outfile.write(packer.pack(output))
+            #ans, ret_list = Code().rob_list(map(lambda x:int(x),val.strip().split()))
+            ans, ret_list = Code().rob_list(val)
+            #outfile.write(packer.pack(str(ans)))
+            #output = "%s\n" % (" ".join(map(str,ret_list)))
+            #outfile.write(packer.pack(output))
+            outfile.write(packer.pack(ans))
+            outfile.write(packer.pack(ret_list))

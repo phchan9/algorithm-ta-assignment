@@ -2,6 +2,7 @@ __author__ = 'phchang'
 
 import random
 from rob import Code
+import msgpack
 
 
 if __name__ == '__main__':
@@ -32,16 +33,22 @@ if __name__ == '__main__':
         tests.append(zerofilled_test3)
 
         size = len(tests)
-        first_line = "%d\n" % (size)
-        input.write(first_line)
+        #first_line = "%d\n" % (size)
+        #input.write(first_line)
         coder = Code()
 
+        packer = msgpack.Packer()
+        input.write(packer.pack(size))
+
         for test in tests:
-            line = "%s\n" % ( " ".join(map(str,test)))
-            input.write(line)
+            #line = "%s\n" % ( " ".join(map(str,test)))
+            #input.write(line)
+            input.write(packer.pack(test))
 
             ans = coder.rob(test)
             ans_line = "%d\n" % ans
-            output.write(ans_line)
-            output.write(line)
+            #output.write(ans_line)
+            #output.write(line)
+            output.write(packer.pack(ans))
+            output.write(packer.pack(test))
 
