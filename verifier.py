@@ -43,24 +43,17 @@ if __name__ == "__main__":
 
 	with open('output.txt.{0}'.format(sys.argv[1]), 'r') as f:
 		unpacker = msgpack.Unpacker(f)
-		#outputs = [line.strip() for line in unpacker if line.strip()]
 		outputs = [line for line in unpacker]
 
 	with open('output.txt.gold', 'r') as f:
 		unpacker = msgpack.Unpacker(f)
-		#outputs_gold = [line.strip() for line in unpacker if line.strip()]
 		outputs_gold = [line for line in unpacker]
-
 
 	fCP = open('check_pattern_concise_{0}.report.final'.format(sys.argv[1]),'w')
 	nTest = len(outputs_gold)/2
 	teacher = Checker()
 
 	for k in range(0, min(len(outputs),len(outputs_gold)),2):
-		#gold_ans = int(outputs_gold[k])
-		#orig_list = map(lambda x:int(x),outputs_gold[k+1].split())
-		#user_ans = int(outputs[k])
-		#ret_list = map(lambda x:int(x),outputs[k+1].split())
 		gold_ans, user_ans = outputs_gold[k], outputs[k]
 		orig_list, ret_list = outputs_gold[k+1], outputs[k+1]
 
